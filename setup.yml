@@ -1,0 +1,23 @@
+- name: Install Nginx with Docker and Custom Page
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Create HTML folder
+      file:
+        path: /opt/html
+        state: directory
+
+    - name: Add custom HTML
+      copy:
+        dest: /opt/html/index.html
+        content: "<h1>Hello from Nginx with Ansible inside EC2!</h1>"
+
+    - name: Run Nginx container
+      docker_container:
+        name: nginx
+        image: nginx
+        state: started
+        ports:
+          - "80:80"
+        volumes:
+          - /opt/html:/usr/share/nginx/html:ro
