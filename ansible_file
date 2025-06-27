@@ -1,0 +1,13 @@
+ssh -i C:\Users\shivansh\Downloads\pem.pem ec2-user@43.205.94.20
+
+sudo amazon-linux-extras enable ansible2
+sudo yum install ansible -y
+ansible --version
+
+sudo yum install docker -y
+sudo systemctl start docker
+sudo systemctl enable docker
+
+ansible-playbook setup.yml
+
+http://43.205.94.20
